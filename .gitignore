@@ -40,3 +40,6 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+### Astah ###
+/src/design/worttrainer_uml.asta.lock
