@@ -123,4 +123,11 @@ public class Worttrainer {
             throw new IllegalArgumentException("List is null");
         this.pairList = list;
     }
+
+    /*
+     * Getter for pairList
+     */
+    public List<WordPicturePair> getPairList() {
+        return this.pairList;
+    }
 }
