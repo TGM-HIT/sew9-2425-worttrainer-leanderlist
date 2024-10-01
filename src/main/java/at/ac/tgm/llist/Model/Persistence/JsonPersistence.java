@@ -4,9 +4,7 @@ import at.ac.tgm.llist.Model.Worttrainer;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * @author Leander-List
@@ -40,12 +38,13 @@ public class JsonPersistence implements Persistence {
     @Override
     public Worttrainer load(String path) {
         Gson gson = new GsonBuilder().create();
-        try {
-            return gson.fromJson(path, Worttrainer.class);
-        } catch (Exception e) {
+        try(BufferedReader reader = new BufferedReader(new FileReader(path))) {
+            return gson.fromJson(reader, Worttrainer.class);
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
-            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return null;
     }
-
 }
