@@ -20,7 +20,7 @@ public class JsonPersistence implements Persistence {
      */
     @Override
     public void save(Worttrainer wt, String path) {
-        Gson gson = new GsonBuilder().create();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         String wtAsJson = gson.toJson(wt);
 
         try (OutputStream out = new FileOutputStream(path)) {
