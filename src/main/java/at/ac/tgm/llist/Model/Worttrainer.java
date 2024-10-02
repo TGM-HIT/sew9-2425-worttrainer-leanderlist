@@ -131,4 +131,16 @@ public class Worttrainer {
     public List<WordPicturePair> getPairList() {
         return this.pairList;
     }
+
+    /*
+     * Adds an entry to the pairList
+     * @param url the URL of the picture
+     * @param word the word to add
+     */
+    public void addEntry(String url, String word) {
+        if (word == null || word.isEmpty() || url == null || url.isEmpty()) {
+            throw new IllegalArgumentException("Word and URL must not be empty");
+        }
+        this.pairList.add(new WordPicturePair(url, word));
+    }
 }

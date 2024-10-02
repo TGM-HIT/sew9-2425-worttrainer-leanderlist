@@ -87,4 +87,13 @@ public class WorttrainerController {
         }
         this.view.setTotalCount(this.model.getAnswerCount());
     }
+
+    /**
+     * Adds an entry to the model
+     * @param word the word to add
+     * @param url the url to add
+     */
+    public void addEntry(String word, String url) {
+        this.model.addEntry(word, url);
+    }
 }
