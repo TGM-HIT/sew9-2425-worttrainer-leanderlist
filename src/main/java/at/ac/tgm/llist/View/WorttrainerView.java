@@ -3,11 +3,16 @@ package at.ac.tgm.llist.View;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.net.URL;
 
+import at.ac.tgm.llist.Controller.WorttrainerController;
 import at.ac.tgm.llist.Model.WordPicturePair;
 
 public class WorttrainerView extends JFrame {
+
+    private WorttrainerController controller;
 
     private int correctCount = 0;
     private JLabel correctCountLabel = new JLabel("Correct: " + this.correctCount);
@@ -16,12 +21,13 @@ public class WorttrainerView extends JFrame {
     private int totalCount = 0;
     private JLabel totalCountLabel = new JLabel("Total: " + this.totalCount);
     private JLabel lastWord = new JLabel("Last: Incorrect");
-    private ImageIcon image = new ImageIcon();
+    private JLabel imageLabel = new JLabel();
     private JTextField inputField = new JTextField();
 
 
-    public WorttrainerView() {
+    public WorttrainerView(WorttrainerController controller) {
         super("Worttrainer");
+        this.controller = controller;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
@@ -44,7 +50,8 @@ public class WorttrainerView extends JFrame {
         topPanel.add(this.totalCountLabel);
         topPanel.add(this.lastWord);
 
-        JLabel imageLabel = new JLabel(this.image); //TODO add image
+        this.imageLabel = new JLabel();
+        this.imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         mainPanel.add(imageLabel, BorderLayout.CENTER);
 
         JPanel bottomPanel = new JPanel();
@@ -58,6 +65,24 @@ public class WorttrainerView extends JFrame {
 
         this.add(bottomPanel, BorderLayout.SOUTH);
 
+        this.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                super.windowClosing(e);
+                JFileChooser fileChooser = new JFileChooser();
+                int choice = fileChooser.showSaveDialog(null);
+                if (choice == JFileChooser.APPROVE_OPTION) {
+                    controller.save(fileChooser.getSelectedFile().getAbsolutePath());
+                }
+            }
+        });
+
+        inputField.addActionListener(
+                (listener) -> {
+                    controller.check(inputField.getText());
+                    inputField.setText("");
+                }
+        );
 
 
         this.pack();
@@ -110,7 +135,7 @@ public class WorttrainerView extends JFrame {
     public void setImage(String url) {
         if(url != null && !url.isEmpty() && WordPicturePair.checkUrl(url)) {
             try {
-                this.image.setImage(ImageIO.read(new URL(url)));
+                this.imageLabel.setIcon(new ImageIcon(ImageIO.read(new URL(url))));
             } catch (Exception ignored) {}
         }
     }
@@ -119,11 +144,5 @@ public class WorttrainerView extends JFrame {
         String text = this.inputField.getText();
         this.inputField.setText("");
         return text;
-    }
-
-    public static void main(String[] args) {
-        WorttrainerView wtv = new WorttrainerView();
-        wtv.setImage("https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png");
-
     }
 }
