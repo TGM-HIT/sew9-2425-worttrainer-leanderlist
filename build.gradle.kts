@@ -1,5 +1,6 @@
+
 plugins {
-    id("java")
+    mavenCentral()
 }
 
 group = "org.example"
@@ -13,6 +14,15 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     implementation("com.google.code.gson:gson:2.11.0")
+}
+
+tasks.jar {
+    manifest {
+        attributes(
+            "Main-Class" to "at.ac.tgm.llist.Main"
+        )
+    }
+    archiveBaseName.set("Worttrainer")
 }
 
 tasks.test {
