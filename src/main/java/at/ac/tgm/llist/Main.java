@@ -3,6 +3,8 @@ package at.ac.tgm.llist;
 import at.ac.tgm.llist.Controller.WorttrainerController;
 import at.ac.tgm.llist.Model.Persistence.JsonPersistence;
 
+import javax.swing.*;
+
 /**
  * @author Leander-List
  * @version 02-10-2024
@@ -14,6 +16,9 @@ public class Main {
      * @param args the arguments
      */
     public static void main(String[] args) {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch(Exception ignored){}
         new WorttrainerController(new JsonPersistence());
     }
 }
