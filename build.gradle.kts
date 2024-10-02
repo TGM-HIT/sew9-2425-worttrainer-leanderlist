@@ -1,6 +1,6 @@
 
 plugins {
-    mavenCentral()
+
 }
 
 group = "org.example"
