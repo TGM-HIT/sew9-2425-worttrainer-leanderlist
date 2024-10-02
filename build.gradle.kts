@@ -17,6 +17,7 @@ dependencies {
 }
 
 tasks.jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
         attributes(
             "Main-Class" to "at.ac.tgm.llist.Main"
