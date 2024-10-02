@@ -34,6 +34,7 @@ public class WorttrainerView extends JFrame {
      */
     public WorttrainerView(WorttrainerController controller) {
         super("Worttrainer");
+        this.setPreferredSize(new Dimension(800, 600));
         this.controller = controller;
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
