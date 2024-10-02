@@ -16,6 +16,12 @@ dependencies {
     implementation("com.google.code.gson:gson:2.11.0")
 }
 
+val customFileName: String = if(project.hasProperty("fileName")) {
+    project.property("fileName") as String
+} else {
+    "Worttrainer.jar"
+}
+
 tasks.jar {
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
     manifest {
@@ -26,7 +32,7 @@ tasks.jar {
     from({
         configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) }
     })
-    archiveBaseName.set("Worttrainer")
+    archiveFileName.set(customFileName)
 }
 
 tasks.test {

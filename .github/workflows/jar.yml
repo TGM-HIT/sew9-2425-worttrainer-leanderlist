@@ -22,7 +22,7 @@
           run: chmod +x gradlew
           
         - name: Build with Gradle
-          run: ./gradlew build
+          run: ./gradlew build -PfileName=Worttrainer-${{ github.event.release.tag_name }}.jar
           
         - name: Archive Jar
           uses: actions/upload-artifact@v4
@@ -34,8 +34,8 @@
           uses: actions/upload-release-asset@latest
           with:
             upload_url: ${{ github.event.release.upload_url }}
-            asset_path: ./Worttrainer.jar
-            asset_name: Worttrainer.jar
+            asset_path: ./build/libs/Worttrainer-${{ github.event.release.tag_name }}.jar
+            asset_name: Worttrainer-${{ github.event.release.tag_name }}.jar
             #asset_path: ./Worttrainer-${{ github.event.release.tag_name }}.jar
             #asset_name: Worttrainer-${{ github.event.release.tag_name }}.jar
             asset_content_type: application/java-archive
