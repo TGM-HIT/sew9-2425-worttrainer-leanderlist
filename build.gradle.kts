@@ -22,6 +22,9 @@ tasks.jar {
             "Main-Class" to "at.ac.tgm.llist.Main"
         )
     }
+    from({
+        configurations.runtimeClasspath.get().map { if (it.isDirectory) it else zipTree(it) }
+    })
     archiveBaseName.set("Worttrainer")
 }
 
