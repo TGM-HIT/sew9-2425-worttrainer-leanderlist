@@ -53,6 +53,7 @@ public class Worttrainer {
         boolean isCorrect = this.pairList.get(currentPairIndex).getWord().equals(answer);
         if (isCorrect) {
             this.correctCount++;
+            this.selectRandomPair();
             return true;
         } else {
             this.wrongCount++;
