@@ -74,7 +74,11 @@ public class WorttrainerView extends JFrame {
                         String url = JOptionPane.showInputDialog("Enter the url");
                         if(url != null && !url.isEmpty() && WordPicturePair.checkUrl(url)) {
                             controller.addEntry(url, word);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Invalid URL", "Error", JOptionPane.ERROR_MESSAGE);
                         }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Invalid word", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
         );
